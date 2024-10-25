@@ -59,6 +59,13 @@ public class PeerFileSharing {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		// try(final DatagramSocket socket = new DatagramSocket()) {
+		// 	socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+		// 	String ip = socket.getLocalAddress().getHostAddress();
+		// 	return ip;
+		// } catch (Exception e) {
+		// 	e.printStackTrace();
+		// }
 		return null;
 	}
 
@@ -68,6 +75,7 @@ public class PeerFileSharing {
 				serverSocket = new ServerSocket(serverPort, 50, InetAddress.getByName("0.0.0.0"));
 				// localAddress = InetAddress.getLocalHost().getHostAddress();
 				localAddress = getNetworkIpAddress();
+				// localAddress = "10.180.147.6";
 				System.out.println("Peer Server: started on Port " + serverPort);
 				ssl.onStatusUpdate("Server started with IP: " + localAddress + ", Port: " + Integer.toString(serverPort));
 				while(isRunning) {
@@ -153,7 +161,7 @@ public class PeerFileSharing {
 				}
 				dataOutput.close();
 				System.out.println("File sent.");
-				ssl.onStatusUpdate("File sent.");
+				ssl.onStatusUpdate("File sent to address " + peerAddr + ".");
 				fis.close();
 			} catch (IOException e) {
 				System.out.println("Error sending file");
@@ -208,7 +216,7 @@ public class PeerFileSharing {
 							totalRead += bytesRead;
 						}
 						System.out.println("Total " + Integer.toString(totalRead) + " bytes read.");
-						ssl.onStatusUpdate("Total " + Integer.toString(totalRead) + " bytes read.");;
+						ssl.onStatusUpdate("Total " + Integer.toString(totalRead) + " bytes read from " + clientSocket.getInetAddress().getHostAddress() + ".");;
 						fileOut.close();
 					} catch (IOException e) {
 						System.out.println("Saving file error");

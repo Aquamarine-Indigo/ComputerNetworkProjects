@@ -49,7 +49,7 @@ public class UserInterface extends JFrame implements ServerStatusListener{
 		peerPortField = new JTextField();
 		saveDirLabel = new JLabel("Save File Directory");
 		saveDirField = new JTextField();
-		requestButton = new JButton("Request File");
+		requestButton = new JButton("Send File");
 		startServerButton = new JButton("Start Server");
 
 		ipAddressLabel = new JLabel("IP Address");
